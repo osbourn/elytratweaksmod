@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"osbourn.elytratweaks.ExampleMod"
+			"osbourn.elytratweaks.ElytraTweaksMod"
 		],
 		"client": [
-			"osbourn.elytratweaks.ExampleModClient"
+			"osbourn.elytratweaks.ElytraTweaksModClient"
 		]
 	},
 	"mixins": [
