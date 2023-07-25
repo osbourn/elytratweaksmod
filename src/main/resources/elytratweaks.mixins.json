@@ -3,7 +3,8 @@
 	"package": "osbourn.elytratweaks.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"FlyIntoWallDamageMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
