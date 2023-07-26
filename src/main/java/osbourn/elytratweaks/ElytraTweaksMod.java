@@ -17,7 +17,7 @@ public class ElytraTweaksMod implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger("elytratweaks");
-	private static final RegistryKey<DamageType> FLY_ON_GROUND_DAMAGE =
+	public static final RegistryKey<DamageType> FLY_ON_GROUND_DAMAGE =
 			RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("elytratweaks", "fly_on_ground"));
 
 	/**
