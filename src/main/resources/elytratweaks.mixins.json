@@ -5,7 +5,8 @@
 	"mixins": [
 		"FlyIntoWallDamageMixin",
 		"StopFlyingOnDamageMixin",
-		"HighAltitudeAirMixin"
+		"HighAltitudeAirMixin",
+		"LandingMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
