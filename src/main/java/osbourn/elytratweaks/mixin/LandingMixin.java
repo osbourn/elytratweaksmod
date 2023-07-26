@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
 abstract class LandingMixin extends Entity {
@@ -38,7 +39,7 @@ abstract class LandingMixin extends Entity {
 
             if (damageAmount > 0.1F) {
                 this.lastDamageTaken = 0.0F;
-                entity.damage(this.getDamageSources().fall(), damageAmount);
+                entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
             }
         }
         entity.move(movementType, vec3d);
