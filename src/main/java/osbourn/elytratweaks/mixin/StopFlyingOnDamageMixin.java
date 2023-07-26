@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class StopFlyingOnDamageMixin extends Entity {
+    private static final boolean ACTIVE = false;
+
     public StopFlyingOnDamageMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -20,7 +22,7 @@ public abstract class StopFlyingOnDamageMixin extends Entity {
     public void disengageOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
         if (cir.getReturnValueZ()) {
-            if (self.isFallFlying()) {
+            if (ACTIVE && self.isFallFlying()) {
                 if (!self.getWorld().isClient) {
                     // 7 means "fall flying"
                     this.setFlag(7, false);

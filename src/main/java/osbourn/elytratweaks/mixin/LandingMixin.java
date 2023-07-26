@@ -8,11 +8,14 @@ import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(LivingEntity.class)
 abstract class LandingMixin extends Entity {
+    @Shadow protected float lastDamageTaken;
+
     private LandingMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -25,7 +28,9 @@ abstract class LandingMixin extends Entity {
             entity.setVelocity(getNewVelocity(oldVelocity));
             entity.velocityDirty = true;
             double changeInHorizontalVelocity = oldVelocity.horizontalLength() - entity.getVelocity().horizontalLength();
-            System.out.println(changeInHorizontalVelocity);
+            float damageAmount = (float) changeInHorizontalVelocity * 100F;
+            this.lastDamageTaken = 0.0F;
+            entity.damage(this.getDamageSources().fall(), damageAmount);
         }
         entity.move(movementType, vec3d);
     }
@@ -57,6 +62,6 @@ abstract class LandingMixin extends Entity {
 
     private static Vec3d getNewVelocity(Vec3d oldVec) {
         // TODO: Make this a linear decrease rather than exponential
-        return new Vec3d(oldVec.x * 0.95, oldVec.y, oldVec.z * 0.95);
+        return new Vec3d(oldVec.x * 0.98, oldVec.y, oldVec.z * 0.98);
     }
 }
