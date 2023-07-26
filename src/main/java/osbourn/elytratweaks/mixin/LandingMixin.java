@@ -28,9 +28,18 @@ abstract class LandingMixin extends Entity {
             entity.setVelocity(getNewVelocity(oldVelocity));
             entity.velocityDirty = true;
             double changeInHorizontalVelocity = oldVelocity.horizontalLength() - entity.getVelocity().horizontalLength();
-            float damageAmount = (float) changeInHorizontalVelocity * 100F;
-            this.lastDamageTaken = 0.0F;
-            entity.damage(this.getDamageSources().fall(), damageAmount);
+
+            // deceleration in meters per second
+            float deceleration = (float) changeInHorizontalVelocity;
+            // estimate of how far was traveled this tick
+            float distanceTraveled = (float) oldVelocity.length();
+            float damageConstant = 5.0F;
+            float damageAmount = deceleration * distanceTraveled * damageConstant;
+
+            if (damageAmount > 0.1F) {
+                this.lastDamageTaken = 0.0F;
+                entity.damage(this.getDamageSources().fall(), damageAmount);
+            }
         }
         entity.move(movementType, vec3d);
     }
@@ -61,7 +70,12 @@ abstract class LandingMixin extends Entity {
     }
 
     private static Vec3d getNewVelocity(Vec3d oldVec) {
-        // TODO: Make this a linear decrease rather than exponential
-        return new Vec3d(oldVec.x * 0.98, oldVec.y, oldVec.z * 0.98);
+        Vec3d horizontalDirectionVec = new Vec3d(oldVec.x, 0, oldVec.z).normalize();
+        Vec3d adjustmentVec = horizontalDirectionVec.multiply(0.03);
+        if (adjustmentVec.horizontalLength() > oldVec.horizontalLength()) {
+            return Vec3d.ZERO;
+        } else {
+            return oldVec.subtract(adjustmentVec);
+        }
     }
 }
