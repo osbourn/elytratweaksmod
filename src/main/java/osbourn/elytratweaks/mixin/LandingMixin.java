@@ -4,9 +4,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,10 +20,13 @@ import osbourn.elytratweaks.ElytraTweaksMod;
 abstract class LandingMixin extends Entity {
     @Shadow protected float lastDamageTaken;
 
+    @Shadow protected abstract void playHurtSound(DamageSource source);
+
     private LandingMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
+    // TODO: This should be an @Inject rather than a @Redirect because we don't actually redirect anything
     @Redirect(method = "travel",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V"))
     public void causeFrictionWhenGlidingOnGround(LivingEntity entity, MovementType movementType, Vec3d vec3d) {
@@ -40,10 +46,13 @@ abstract class LandingMixin extends Entity {
             if (damageAmount > 0.1F) {
                 this.lastDamageTaken = 0.0F;
                 entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
+                this.playHurtSound(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()));
             }
         }
         entity.move(movementType, vec3d);
     }
+
+    //TODO: Cancel tiltScreen in damage method if the source is FLY_ON_GROUND_DAMAGE_SOURCE
 
     @Redirect(method = "travel",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setFlag(IZ)V"))
