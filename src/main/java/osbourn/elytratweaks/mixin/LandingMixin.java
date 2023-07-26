@@ -40,7 +40,7 @@ abstract class LandingMixin extends Entity {
             float deceleration = (float) changeInHorizontalVelocity;
             // estimate of how far was traveled this tick
             float distanceTraveled = (float) oldVelocity.length();
-            float damageConstant = 5.0F;
+            float damageConstant = 20.0F;
             float damageAmount = deceleration * distanceTraveled * damageConstant;
 
             if (damageAmount > 0.1F) {
