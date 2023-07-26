@@ -1,3 +1,4 @@
 {
-  "death.attack.elytratweaks.flyonground": "%s experienced friction"
+  "death.attack.elytratweaks.flyonground": "%s experienced friction",
+  "death.attack.elytratweaks.flyonground.player": "%s experienced friction whilst fighting %s"
 }
