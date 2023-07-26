@@ -37,7 +37,7 @@ public abstract class HighAltitudeAirMixin extends Entity {
     }
 
     private static boolean shouldAffect(LivingEntity entity) {
-        return entity.isFallFlying() || !ONLY_AFFECT_IF_FALL_FLYING;
+        return entity.isPlayer() && (entity.isFallFlying() || !ONLY_AFFECT_IF_FALL_FLYING);
     }
 
     /**
