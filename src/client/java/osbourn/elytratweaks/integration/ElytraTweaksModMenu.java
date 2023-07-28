@@ -67,6 +67,9 @@ public class ElytraTweaksModMenu implements ModMenuApi {
         frictionLanding.addEntry(entryBuilder.startFloatField(Text.literal("Lowest friction damage per tick"), config.lowestFrictionDamagePerTick)
                 .setSaveConsumer(newVal -> config.lowestFrictionDamagePerTick = newVal)
                 .build());
+        frictionLanding.addEntry(entryBuilder.startBooleanToggle(Text.literal("Make damage sound every tick"), config.makeDamageSoundEveryTick)
+                .setSaveConsumer(newVal -> config.makeDamageSoundEveryTick = newVal)
+                .build());
 
         builder.setSavingRunnable(config::save);
     }

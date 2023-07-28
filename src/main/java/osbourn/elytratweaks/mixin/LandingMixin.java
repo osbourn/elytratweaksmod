@@ -48,7 +48,9 @@ abstract class LandingMixin extends Entity {
                 if (damageAmount > ElytraTweaksMod.getConfig().lowestFrictionDamagePerTick) {
                     this.lastDamageTaken = 0.0F;
                     entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
-                    this.playHurtSound(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()));
+                    if (ElytraTweaksMod.getConfig().makeDamageSoundEveryTick) {
+                        this.playHurtSound(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()));
+                    }
                 }
             }
         }

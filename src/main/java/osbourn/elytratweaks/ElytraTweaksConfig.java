@@ -25,6 +25,7 @@ public class ElytraTweaksConfig {
     public boolean doFrictionDamage = true;
     public float frictionDamageScale = 20.0F;
     public float lowestFrictionDamagePerTick = 0.1F;
+    public boolean makeDamageSoundEveryTick = true;
 
     public void save() {
         try (Writer writer = Files.newBufferedWriter(CONFIG_FILE.toPath())) {
