@@ -13,18 +13,18 @@ public class ElytraTweaksConfig {
     private static final File CONFIG_FILE =
             new File(FabricLoader.getInstance().getConfigDir().toFile(), "elytratweaks.json");
 
-    private boolean shouldStopFlyingOnDamage = true;
+    public boolean shouldStopFlyingOnDamage = true;
     public float flyIntoWallDamageMultiplier = 3.0F;
-    private boolean lowAirAtHighAltitudesEnabled = true;
-    private boolean lowAirOnlyAffectsWhenElytraFlying = true;
-    private float normalAirLevel = 150.0F;
-    private float neutralAirLevel = 200.0F;
-    private float thinnestAirLevel = 300.0F;
-    private boolean performFrictionLanding = true;
-    private double slowDownRate = 0.03;
-    private boolean doFrictionDamage = true;
-    private float frictionDamageScale = 20.0F;
-    private float lowestFrictionDamagePerTick = 0.1F;
+    public boolean lowAirAtHighAltitudesEnabled = true;
+    public boolean lowAirOnlyAffectsWhenElytraFlying = true;
+    public float normalAirLevel = 150.0F;
+    public float neutralAirLevel = 200.0F;
+    public float thinnestAirLevel = 300.0F;
+    public boolean performFrictionLanding = true;
+    public double slowDownRate = 0.03;
+    public boolean doFrictionDamage = true;
+    public float frictionDamageScale = 20.0F;
+    public float lowestFrictionDamagePerTick = 0.1F;
 
     public boolean shouldStopFlyingOnDamage() {
         return shouldStopFlyingOnDamage;
