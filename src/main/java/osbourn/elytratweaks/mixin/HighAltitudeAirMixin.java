@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
-public abstract class HighAltitudeAirMixin extends Entity {
+abstract class HighAltitudeAirMixin extends Entity {
     /*
      * If false, then the thinner atmosphere won't affect entities unless they are elytra-flying.
      */

@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
-public abstract class StopFlyingOnDamageMixin extends Entity {
-    public StopFlyingOnDamageMixin(EntityType<?> type, World world) {
+abstract class StopFlyingOnDamageMixin extends Entity {
+    private StopFlyingOnDamageMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 

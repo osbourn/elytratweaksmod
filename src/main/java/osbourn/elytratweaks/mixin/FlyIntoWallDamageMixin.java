@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
-public class FlyIntoWallDamageMixin {
+abstract class FlyIntoWallDamageMixin {
     @Redirect(method = "travel",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     public boolean modifyFlyIntoWallDamage(LivingEntity instance, DamageSource source, float amount) {
