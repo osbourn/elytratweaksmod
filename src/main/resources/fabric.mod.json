@@ -8,8 +8,7 @@
 		"Niels Voss"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/osbourn/elytratweaksmod"
 	},
 	"license": "GPL-3.0",
 	"icon": "assets/elytratweaks/icon.png",
