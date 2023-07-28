@@ -30,7 +30,8 @@ abstract class LandingMixin extends Entity {
     @Redirect(method = "travel",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V"))
     public void causeFrictionWhenGlidingOnGround(LivingEntity entity, MovementType movementType, Vec3d vec3d) {
-        if (entity.isOnGround() && entity.isFallFlying()) {
+        boolean frictionDamageEnabled = ElytraTweaksMod.getConfig().doFrictionDamage();
+        if (frictionDamageEnabled && entity.isOnGround() && entity.isFallFlying()) {
             Vec3d oldVelocity = entity.getVelocity();
             entity.setVelocity(getNewVelocity(oldVelocity));
             entity.velocityDirty = true;
@@ -40,10 +41,10 @@ abstract class LandingMixin extends Entity {
             float deceleration = (float) changeInHorizontalVelocity;
             // estimate of how far was traveled this tick
             float distanceTraveled = (float) oldVelocity.length();
-            float damageConstant = 20.0F;
+            float damageConstant = ElytraTweaksMod.getConfig().frictionDamageScale();
             float damageAmount = deceleration * distanceTraveled * damageConstant;
 
-            if (damageAmount > 0.1F) {
+            if (damageAmount > ElytraTweaksMod.getConfig().lowestFrictionDamagePerTick()) {
                 this.lastDamageTaken = 0.0F;
                 entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
                 this.playHurtSound(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()));
@@ -57,9 +58,10 @@ abstract class LandingMixin extends Entity {
     @Redirect(method = "travel",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setFlag(IZ)V"))
     public void preventDisengagingElytraInTravelMethod(LivingEntity entity, int index, boolean value) {
+        boolean featureActive = ElytraTweaksMod.getConfig().performFrictionLanding();
         boolean isDisablingElytra = index == 7 && !value;
         boolean movingSlowEnoughToDisableOnGround = entity.getVelocity().length() <= 0.1;
-        if (!isDisablingElytra || movingSlowEnoughToDisableOnGround) {
+        if (!featureActive || !isDisablingElytra || movingSlowEnoughToDisableOnGround) {
             // "this" should be the same as "entity" at this point in the code
             this.setFlag(index, value);
         }
@@ -68,9 +70,10 @@ abstract class LandingMixin extends Entity {
     @Redirect(method = "tickFallFlying",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setFlag(IZ)V"))
     public void preventDisengagingElytraInTickFallFlyingMethod(LivingEntity entity, int index, boolean value) {
+        boolean featureActive = ElytraTweaksMod.getConfig().performFrictionLanding();
         boolean isDisablingElytra = index == 7 && !value;
         boolean movingSlowEnoughToDisableOnGround = entity.getVelocity().length() <= 0.1;
-        if (!isDisablingElytra) {
+        if (!featureActive || !isDisablingElytra) {
             // "this" should be the same as "entity" at this point in the code
             this.setFlag(index, value);
         }
@@ -81,7 +84,7 @@ abstract class LandingMixin extends Entity {
 
     private static Vec3d getNewVelocity(Vec3d oldVec) {
         Vec3d horizontalDirectionVec = new Vec3d(oldVec.x, 0, oldVec.z).normalize();
-        Vec3d adjustmentVec = horizontalDirectionVec.multiply(0.03);
+        Vec3d adjustmentVec = horizontalDirectionVec.multiply(ElytraTweaksMod.getConfig().slowDownRate());
         if (adjustmentVec.horizontalLength() > oldVec.horizontalLength()) {
             return Vec3d.ZERO;
         } else {

@@ -5,6 +5,7 @@ import net.minecraft.entity.damage.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
 public class FlyIntoWallDamageMixin {
@@ -13,6 +14,6 @@ public class FlyIntoWallDamageMixin {
     public boolean modifyFlyIntoWallDamage(LivingEntity instance, DamageSource source, float amount) {
         if (!source.equals(instance.getDamageSources().flyIntoWall())) return instance.damage(source, amount);
 
-        return instance.damage(source, amount * 3);
+        return instance.damage(source, amount * ElytraTweaksMod.getConfig().flyIntoWallDamageMultiplier());
     }
 }

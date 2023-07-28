@@ -14,9 +14,64 @@ public class ElytraTweaksConfig {
             new File(FabricLoader.getInstance().getConfigDir().toFile(), "elytratweaks.json");
 
     private boolean shouldStopFlyingOnDamage = true;
+    private float flyIntoWallDamageMultiplier = 3.0F;
+    private boolean lowAirAtHighAltitudesEnabled = true;
+    private boolean lowAirOnlyAffectsWhenElytraFlying = true;
+    private float normalAirLevel = 150.0F;
+    private float neutralAirLevel = 200.0F;
+    private float thinnestAirLevel = 300.0F;
+    private boolean performFrictionLanding = true;
+    private double slowDownRate = 0.03;
+    private boolean doFrictionDamage = true;
+    private float frictionDamageScale = 20.0F;
+    private float lowestFrictionDamagePerTick = 0.1F;
 
     public boolean shouldStopFlyingOnDamage() {
         return shouldStopFlyingOnDamage;
+    }
+
+    public float flyIntoWallDamageMultiplier() {
+        return flyIntoWallDamageMultiplier;
+    }
+
+    public boolean lowAirAtHighAltitudesEnabled() {
+        return lowAirAtHighAltitudesEnabled;
+    }
+
+    public boolean lowAirOnlyAffectsWhenElytraFlying() {
+        return lowAirOnlyAffectsWhenElytraFlying;
+    }
+
+    public float normalAirLevel() {
+        return normalAirLevel;
+    }
+
+    public float neutralAirLevel() {
+        return neutralAirLevel;
+    }
+
+    public float thinnestAirLevel() {
+        return thinnestAirLevel;
+    }
+
+    public boolean performFrictionLanding() {
+        return performFrictionLanding;
+    }
+
+    public double slowDownRate() {
+        return slowDownRate;
+    }
+
+    public boolean doFrictionDamage() {
+        return doFrictionDamage;
+    }
+
+    public float frictionDamageScale() {
+        return frictionDamageScale;
+    }
+
+    public float lowestFrictionDamagePerTick() {
+        return lowestFrictionDamagePerTick;
     }
 
     public void save() {
