@@ -14,8 +14,6 @@ import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
 public abstract class StopFlyingOnDamageMixin extends Entity {
-    private static final boolean ACTIVE = true;
-
     public StopFlyingOnDamageMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -25,7 +23,7 @@ public abstract class StopFlyingOnDamageMixin extends Entity {
         LivingEntity self = (LivingEntity) (Object) this;
         if (cir.getReturnValueZ() && !sourceIgnored(source)) {
             if (!self.getWorld().isClient) {
-                if (ACTIVE && self.isFallFlying()) {
+                if (ElytraTweaksMod.getConfig().shouldStopFlyingOnDamage() && self.isFallFlying()) {
                     // 7 means "fall flying"
                     this.setFlag(7, false);
                 }
