@@ -3,15 +3,15 @@
 	"id": "elytratweaks",
 	"version": "${version}",
 	"name": "Elytra Tweaks",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Makes several modifications to the Elytra to make it more difficult and dangerous to use.",
 	"authors": [
-		"Me!"
+		"Niels Voss"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "GPL-3.0",
 	"icon": "assets/elytratweaks/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -36,6 +36,6 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"do-a-barrel-roll": "*"
 	}
 }
