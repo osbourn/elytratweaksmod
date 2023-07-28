@@ -28,24 +28,28 @@ abstract class LandingMixin extends Entity {
     @Redirect(method = "travel",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V"))
     public void causeFrictionWhenGlidingOnGround(LivingEntity entity, MovementType movementType, Vec3d vec3d) {
+        boolean featureEnabled = ElytraTweaksMod.getConfig().performFrictionLanding;
         boolean frictionDamageEnabled = ElytraTweaksMod.getConfig().doFrictionDamage;
-        if (frictionDamageEnabled && entity.isOnGround() && entity.isFallFlying()) {
+        if (featureEnabled && entity.isOnGround() && entity.isFallFlying()) {
             Vec3d oldVelocity = entity.getVelocity();
             entity.setVelocity(getNewVelocity(oldVelocity));
             entity.velocityDirty = true;
-            double changeInHorizontalVelocity = oldVelocity.horizontalLength() - entity.getVelocity().horizontalLength();
 
-            // deceleration in meters per second
-            float deceleration = (float) changeInHorizontalVelocity;
-            // estimate of how far was traveled this tick
-            float distanceTraveled = (float) oldVelocity.length();
-            float damageConstant = ElytraTweaksMod.getConfig().frictionDamageScale;
-            float damageAmount = deceleration * distanceTraveled * damageConstant;
+            if (frictionDamageEnabled) {
+                double changeInHorizontalVelocity = oldVelocity.horizontalLength() - entity.getVelocity().horizontalLength();
 
-            if (damageAmount > ElytraTweaksMod.getConfig().lowestFrictionDamagePerTick) {
-                this.lastDamageTaken = 0.0F;
-                entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
-                this.playHurtSound(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()));
+                // deceleration in meters per second
+                float deceleration = (float) changeInHorizontalVelocity;
+                // estimate of how far was traveled this tick
+                float distanceTraveled = (float) oldVelocity.length();
+                float damageConstant = ElytraTweaksMod.getConfig().frictionDamageScale;
+                float damageAmount = deceleration * distanceTraveled * damageConstant;
+
+                if (damageAmount > ElytraTweaksMod.getConfig().lowestFrictionDamagePerTick) {
+                    this.lastDamageTaken = 0.0F;
+                    entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
+                    this.playHurtSound(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()));
+                }
             }
         }
         entity.move(movementType, vec3d);
