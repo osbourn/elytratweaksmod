@@ -26,54 +26,6 @@ public class ElytraTweaksConfig {
     public float frictionDamageScale = 20.0F;
     public float lowestFrictionDamagePerTick = 0.1F;
 
-    public boolean shouldStopFlyingOnDamage() {
-        return shouldStopFlyingOnDamage;
-    }
-
-    public float flyIntoWallDamageMultiplier() {
-        return flyIntoWallDamageMultiplier;
-    }
-
-    public boolean lowAirAtHighAltitudesEnabled() {
-        return lowAirAtHighAltitudesEnabled;
-    }
-
-    public boolean lowAirOnlyAffectsWhenElytraFlying() {
-        return lowAirOnlyAffectsWhenElytraFlying;
-    }
-
-    public float normalAirLevel() {
-        return normalAirLevel;
-    }
-
-    public float neutralAirLevel() {
-        return neutralAirLevel;
-    }
-
-    public float thinnestAirLevel() {
-        return thinnestAirLevel;
-    }
-
-    public boolean performFrictionLanding() {
-        return performFrictionLanding;
-    }
-
-    public double slowDownRate() {
-        return slowDownRate;
-    }
-
-    public boolean doFrictionDamage() {
-        return doFrictionDamage;
-    }
-
-    public float frictionDamageScale() {
-        return frictionDamageScale;
-    }
-
-    public float lowestFrictionDamagePerTick() {
-        return lowestFrictionDamagePerTick;
-    }
-
     public void save() {
         try (Writer writer = Files.newBufferedWriter(CONFIG_FILE.toPath())) {
             new GsonBuilder().setPrettyPrinting().create().toJson(this, writer);

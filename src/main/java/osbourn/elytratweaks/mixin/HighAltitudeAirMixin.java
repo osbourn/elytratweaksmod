@@ -38,11 +38,11 @@ abstract class HighAltitudeAirMixin extends Entity {
     }
 
     private static boolean shouldAffect(LivingEntity entity) {
-        if (!ElytraTweaksMod.getConfig().lowAirAtHighAltitudesEnabled()) {
+        if (!ElytraTweaksMod.getConfig().lowAirAtHighAltitudesEnabled) {
             return false;
         }
         return entity.isPlayer() && (entity.isFallFlying()
-                || !ElytraTweaksMod.getConfig().lowAirOnlyAffectsWhenElytraFlying());
+                || !ElytraTweaksMod.getConfig().lowAirOnlyAffectsWhenElytraFlying);
     }
 
     /**
@@ -54,7 +54,7 @@ abstract class HighAltitudeAirMixin extends Entity {
     @Redirect(method = "baseTick",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
     public boolean makeHighAltitudeCountAsWater(LivingEntity entity, TagKey<Fluid> fluidTag) {
-        if (entity.getY() > ElytraTweaksMod.getConfig().neutralAirLevel() && shouldAffect(entity)) {
+        if (entity.getY() > ElytraTweaksMod.getConfig().neutralAirLevel && shouldAffect(entity)) {
             return true;
         } else {
             return entity.isSubmergedIn(fluidTag);
@@ -66,8 +66,8 @@ abstract class HighAltitudeAirMixin extends Entity {
     public void airLossInHighAltitude(int air, CallbackInfoReturnable<Integer> cir) {
         // If the player is submerged in water, then vanilla mechanics should be used
         if (!this.isSubmergedIn(FluidTags.WATER)) {
-            double neutralAirLevel = ElytraTweaksMod.getConfig().neutralAirLevel();
-            double thinnestAirLevel = ElytraTweaksMod.getConfig().thinnestAirLevel();
+            double neutralAirLevel = ElytraTweaksMod.getConfig().neutralAirLevel;
+            double thinnestAirLevel = ElytraTweaksMod.getConfig().thinnestAirLevel;
             if (this.getY() > neutralAirLevel && shouldAffect((LivingEntity) (Object) this)) {
 
                 // This would be 0.5 if the player is exactly halfway between the neutral and thinnest air levels,
@@ -89,8 +89,8 @@ abstract class HighAltitudeAirMixin extends Entity {
     public void airRecoveryInHighAltitude(int air, CallbackInfoReturnable<Integer> cir) {
         // If the player is submerged in water, then vanilla mechanics should be used
         if (!this.isSubmergedIn(FluidTags.WATER)) {
-            double normalAirLevel = ElytraTweaksMod.getConfig().normalAirLevel();
-            double neutralAirLevel = ElytraTweaksMod.getConfig().neutralAirLevel();
+            double normalAirLevel = ElytraTweaksMod.getConfig().normalAirLevel;
+            double neutralAirLevel = ElytraTweaksMod.getConfig().neutralAirLevel;
 
             if (this.getY() > normalAirLevel && shouldAffect((LivingEntity) (Object) this)) {
                 double percentageToNeutral = (this.getY() - normalAirLevel) / (neutralAirLevel - normalAirLevel);

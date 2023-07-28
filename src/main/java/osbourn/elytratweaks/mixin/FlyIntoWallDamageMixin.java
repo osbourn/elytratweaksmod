@@ -14,6 +14,6 @@ abstract class FlyIntoWallDamageMixin {
     public boolean modifyFlyIntoWallDamage(LivingEntity instance, DamageSource source, float amount) {
         if (!source.equals(instance.getDamageSources().flyIntoWall())) return instance.damage(source, amount);
 
-        return instance.damage(source, amount * ElytraTweaksMod.getConfig().flyIntoWallDamageMultiplier());
+        return instance.damage(source, amount * ElytraTweaksMod.getConfig().flyIntoWallDamageMultiplier);
     }
 }

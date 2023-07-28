@@ -23,7 +23,7 @@ abstract class StopFlyingOnDamageMixin extends Entity {
         LivingEntity self = (LivingEntity) (Object) this;
         if (cir.getReturnValueZ() && !sourceIgnored(source)) {
             if (!self.getWorld().isClient) {
-                if (ElytraTweaksMod.getConfig().shouldStopFlyingOnDamage() && self.isFallFlying()) {
+                if (ElytraTweaksMod.getConfig().shouldStopFlyingOnDamage && self.isFallFlying()) {
                     // 7 means "fall flying"
                     this.setFlag(7, false);
                 }
