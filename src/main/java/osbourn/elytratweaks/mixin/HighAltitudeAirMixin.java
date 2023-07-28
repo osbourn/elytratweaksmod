@@ -16,22 +16,6 @@ import osbourn.elytratweaks.ElytraTweaksMod;
 
 @Mixin(LivingEntity.class)
 abstract class HighAltitudeAirMixin extends Entity {
-    /*
-     * If false, then the thinner atmosphere won't affect entities unless they are elytra-flying.
-     */
-    //private static final boolean ONLY_AFFECT_IF_FALL_FLYING = false;
-    /*
-     * At or below the normal air level, players recover air at a normal speed.
-     */
-    //private static final float NORMAL_AIR_LEVEL = 150.0F;
-    /*
-     * The neutral air level is the y-level where players neither lose nor gain air.
-     */
-    //private static final float NEUTRAL_AIR_LEVEL = 200.0F;
-    /*
-     * At or above the thinnest air level, players lose air as if they were underwater.
-     */
-    //private static final float THINNEST_AIR_LEVEL = 300.0F;
 
     private HighAltitudeAirMixin(EntityType<?> type, World world) {
         super(type, world);
