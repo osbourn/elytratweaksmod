@@ -16,6 +16,11 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+
+	/* Cloth Config Integration */
+	maven { url "https://maven.shedaniel.me/" }
+	/* Mod Menu Integration */
+	maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
 loom {
@@ -38,7 +43,15 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+
+	modApi ("me.shedaniel.cloth:cloth-config-fabric:11.1.106") {
+		// Not sure what this line does but it prevent a dependency error relating
+		// to (maybe conflicting versions? of) the the Fabric Model Loading API.
+		// This line was taken from the Farmer's Delight Fabric source code
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	modApi "com.terraformersmc:modmenu:7.1.0"
+
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 

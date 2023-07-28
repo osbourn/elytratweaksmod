@@ -20,6 +20,9 @@
 		],
 		"client": [
 			"osbourn.elytratweaks.ElytraTweaksModClient"
+		],
+		"modmenu": [
+			"osbourn.elytratweaks.integration.ElytraTweaksModMenu"
 		]
 	},
 	"mixins": [
