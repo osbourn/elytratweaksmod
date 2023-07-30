@@ -1,10 +1,10 @@
 package osbourn.elytratweaks.mixin;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.ElytraItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -19,6 +19,8 @@ abstract class LandingMixin extends Entity {
     @Shadow protected float lastDamageTaken;
 
     @Shadow protected abstract void playHurtSound(DamageSource source);
+
+    @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot slot);
 
     private LandingMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -76,12 +78,15 @@ abstract class LandingMixin extends Entity {
     public void preventDisengagingElytraInTickFallFlyingMethod(LivingEntity entity, int index, boolean value) {
         boolean featureActive = ElytraTweaksMod.getConfig().performFrictionLanding;
         boolean isDisablingElytra = index == 7 && !value;
+        boolean isWearingUsableElytra = this.getEquippedStack(EquipmentSlot.CHEST).isOf(Items.ELYTRA)
+                && ElytraItem.isUsable(this.getEquippedStack(EquipmentSlot.CHEST));
         boolean movingSlowEnoughToDisableOnGround = entity.getVelocity().length() <= 0.1;
         if (!featureActive || !isDisablingElytra) {
             // "this" should be the same as "entity" at this point in the code
             this.setFlag(index, value);
         }
-        if (isDisablingElytra && (entity.isSubmergedIn(FluidTags.WATER) || movingSlowEnoughToDisableOnGround)) {
+        if (isDisablingElytra && (entity.isSubmergedIn(FluidTags.WATER) || !isWearingUsableElytra ||
+                movingSlowEnoughToDisableOnGround)) {
             this.setFlag(7, false);
         }
     }
