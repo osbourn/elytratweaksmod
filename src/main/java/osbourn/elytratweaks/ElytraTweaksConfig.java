@@ -14,7 +14,7 @@ public class ElytraTweaksConfig {
             new File(FabricLoader.getInstance().getConfigDir().toFile(), "elytratweaks.json");
 
     public boolean shouldStopFlyingOnDamage = true;
-    public float flyIntoWallDamageMultiplier = 3.0F;
+    public float flyIntoWallDamageMultiplier = 2.0F;
     public boolean lowAirAtHighAltitudesEnabled = true;
     public boolean lowAirOnlyAffectsWhenElytraFlying = true;
     public float normalAirLevel = 150.0F;
