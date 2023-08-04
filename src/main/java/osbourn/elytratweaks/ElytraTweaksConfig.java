@@ -15,7 +15,7 @@ public class ElytraTweaksConfig {
 
     public boolean shouldStopFlyingOnDamage = true;
     public float flyIntoWallDamageMultiplier = 2.0F;
-    public boolean lowAirAtHighAltitudesEnabled = true;
+    public boolean lowAirAtHighAltitudesEnabled = false;
     public boolean lowAirOnlyAffectsWhenElytraFlying = true;
     public float normalAirLevel = 150.0F;
     public float neutralAirLevel = 200.0F;
