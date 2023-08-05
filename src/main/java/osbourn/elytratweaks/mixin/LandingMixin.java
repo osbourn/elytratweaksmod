@@ -2,6 +2,7 @@ package osbourn.elytratweaks.mixin;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -46,8 +47,9 @@ abstract class LandingMixin extends Entity {
                 float distanceTraveled = (float) oldVelocity.length();
                 float damageConstant = ElytraTweaksMod.getConfig().frictionDamageScale;
                 float damageAmount = deceleration * distanceTraveled * damageConstant;
+                boolean isInCreative = entity instanceof PlayerEntity p && p.isCreative();
 
-                if (damageAmount > ElytraTweaksMod.getConfig().lowestFrictionDamagePerTick) {
+                if (!isInCreative && damageAmount > ElytraTweaksMod.getConfig().lowestFrictionDamagePerTick) {
                     this.lastDamageTaken = 0.0F;
                     entity.damage(ElytraTweaksMod.getFlyOnGroundDamageSource(entity.getWorld()), damageAmount);
                     if (ElytraTweaksMod.getConfig().makeDamageSoundEveryTick) {
