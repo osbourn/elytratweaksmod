@@ -23,6 +23,16 @@ avoid taking lots of damage and losing armor durability.
 I recommend using the [Do a Barrel Roll mod](https://www.curseforge.com/minecraft/mc-mods/do-a-barrel-roll)
 mod as well if you are interested in making Elytra something that you have to master.
 
+## Requirements
+
+Elytra Tweaks is currently only available for Fabric 1.20.1. I might port it to other versions
+or mod loaders if it is requested, but I can't make any guarantees (you are of course allowed
+to do this yourself if you know how).
+
+Elytra Tweaks requires the [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api).
+[Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) and
+[Cloth Config](https://www.curseforge.com/minecraft/mc-mods/cloth-config) are highly recommended.
+
 ## Features
 
 All features can be disabled in the config.
@@ -49,6 +59,13 @@ per tick.
 The config is stored in a JSON file, but if you are using Mod Menu and Cloth Config you
 will see a config menu. Cloth Config is highly recommended because it shows a description
 of each setting.
+
+## Bugs
+
+This is my first mod in a very long time, so there might be a lot of bugs. I'm also not sure
+if this conflicts with any major mods, because it uses the `@Redirect` mixin a lot. If you
+experience a bug or have a feature request, please let me know in the
+[GitHub issue tracker](https://github.com/osbourn/elytratweaksmod/issues).
 
 ## License
 
