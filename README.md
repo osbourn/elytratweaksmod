@@ -19,3 +19,33 @@ close to blocks a much more risky endeavor.
 
 Elytra Tweaks also provides a new landing mechanic which requires special attention to
 avoid taking lots of damage and losing armor durability.
+
+I recommend using the [Do a Barrel Roll mod](https://www.curseforge.com/minecraft/mc-mods/do-a-barrel-roll)
+mod as well if you are interested in making Elytra something that you have to master.
+
+## Features
+
+All features can be disabled in the config.
+
+- Players take increased damage when flying into walls (double damage by default)
+- When a player takes damage midair, their elytra will deactivate. They can reactivate
+it immediately, but can it require a good reaction time to avoid falling too far.
+(Note that some damage sources do not trigger this, like friction damage, which is
+explained later.)
+- (Disabled by default) When flying too high, the atmosphere gets thin and you start to
+lose air. By default, this happens at above y=200, which is about cloud level.
+The rate at which you lose air depends on how far you are above y=200. At y=230, you lose
+air at 30% of rate as if you were underwater. At y=270, this increases to 70%, and
+at y=300 you lose air at the same speed as if you were underwater. Similarly, between
+y=150 and y=200, you regain air at a reduced rate depending on your y-level.
+- Instead of exiting flight immediately when hitting the ground, you scrape across the ground
+and slow down gradually over time.
+- Optionally, this friction caused by slowing down when landing can deal damage to the player.
+It resets the player's damage immunity when dealing damage, so the player is damaged once
+per tick.
+
+## Config
+
+The config is stored in a JSON file, but if you are using Mod Menu and Cloth Config you
+will see a config menu. Cloth Config is highly recommended because it shows a description
+of each setting.
