@@ -49,3 +49,12 @@ per tick.
 The config is stored in a JSON file, but if you are using Mod Menu and Cloth Config you
 will see a config menu. Cloth Config is highly recommended because it shows a description
 of each setting.
+
+## License
+
+Elytra Tweaks is licensed under the GNU General Public License, version 3 or later. In short,
+this means you can modify and distribute the mod provided you make your new version open source
+under the GPLv3. You are allowed to use this in any modpack. Please contact me if you would like
+any permissions beyond what is in the GPL.
+
+The source code can be found here: https://github.com/osbourn/elytratweaksmod
