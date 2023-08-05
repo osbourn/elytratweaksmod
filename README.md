@@ -54,6 +54,20 @@ and slow down gradually over time.
 It resets the player's damage immunity when dealing damage, so the player is damaged once
 per tick.
 
+<details>
+<summary>New landing</summary>
+
+![Landing without friction damage](videos/landing-without-damage.gif)
+
+</details>
+
+<details>
+<summary>New landing with friction damage</summary>
+
+![Landing with friction damage](videos/landing-with-damage.gif)
+
+</details>
+
 ## Config
 
 The config is stored in a JSON file, but if you are using Mod Menu and Cloth Config you
